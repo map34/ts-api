@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ConnectionPool } from 'mssql';
 import { config } from '../config';
+import { ConnectionMap } from '../types';
 
 const sqlConfig = (name: string): any => config.db[name];
 
@@ -12,8 +13,8 @@ export abstract class BaseRoute {
    * @constructor
    */
 
-  protected router = Router();
-  protected connection: Object = {};
+  protected router: Router = Router();
+  protected connection: ConnectionMap = {};
 
   async connect (name: string): Promise<ConnectionPool> {
     if (!this.connection[name]) {
