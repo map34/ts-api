@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { logger } from '../services';
 import { PingRoute } from './ping';
 import { BaseRoute } from './route';
@@ -28,7 +28,7 @@ export class ApiRoutes extends BaseRoute {
    * @method getRouter
    * @returns {Router}
    */
-  static get router () {
+  static get router (): Router {
     if (!ApiRoutes.instance) {
       ApiRoutes.instance = new ApiRoutes();
     }

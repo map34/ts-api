@@ -10,8 +10,8 @@ import * as path from 'path';
 import { ApiRoutes } from './routes';
 import { logger } from './services';
 
-const errorHandler = require('errorhandler');
-const methodOverride = require('method-override');
+import errorHandler = require('errorhandler');
+import methodOverride = require('method-override');
 
 /**
  * The server.
@@ -87,7 +87,6 @@ export class Server {
       err.status = 404;
       next(err);
     });
-
     // error handling
     this.app.use(errorHandler());
   }
