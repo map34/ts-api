@@ -24,7 +24,7 @@ export const file = (sequelize: Sequelize): FileModel => {
         notEmpty: true
       }
     },
-    size_mb: {
+    size_bytes: {
       type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
