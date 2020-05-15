@@ -21,6 +21,4 @@ node_modules/
 *.tap
 checkstyle-result.xml
 
-.idea
-.vs
-.vscode
+.idea/
