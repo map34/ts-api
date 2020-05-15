@@ -4,7 +4,7 @@ export interface DatabaseConfig {
   database: string;
   host: string;
   port: number;
-  query_timeout: number;
+  queryTimeout: number;
 }
 
 export interface Config {
