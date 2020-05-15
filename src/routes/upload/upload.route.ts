@@ -63,7 +63,8 @@ export class UploadRoute extends BaseRoute {
   private async getFile (req: Request, res: Response, next: NextFunction) {
     try {
       const col = await loadLocalDB(COLLECTION_NAME, db);
-      const result = col.get(req.params.id);
+      const numericId = parseInt(req.params.id, 10);
+      const result = col.get(numericId);
       logger.info(result.filename);
 
       if (!result) {
