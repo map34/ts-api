@@ -1,13 +1,13 @@
+import { logger } from '../services';
+
 const delay = (time: number): Promise<any> => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
 
-const asyncAwait = async (): Promise<any> => {
-  console.log('Knock, knock!');
+export const asyncAwait = async (): Promise<any> => {
+  logger.info('Knock, knock!');
   await delay(1000);
-  console.log('Who\'s there?');
+  logger.info('Who\'s there?');
   await delay(1000);
-  console.log('async/await!');
+  logger.info('async/await!');
 };
-
-asyncAwait();

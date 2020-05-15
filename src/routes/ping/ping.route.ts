@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { logger } from '../../services';
+import { asyncAwait } from '../../scripts/async';
 import { BaseRoute } from '../route';
 
 /**
@@ -19,7 +20,10 @@ export class PingRoute extends BaseRoute {
    */
   private constructor () {
     super();
+
     this.get = this.get.bind(this);
+
+    this.router.get('/async', this.doAsync);
     this.init();
   }
 
@@ -47,6 +51,12 @@ export class PingRoute extends BaseRoute {
    */
   private async get (req: Request, res: Response, next: NextFunction) {
     res.json('pong');
+    next();
+  }
+
+  private async doAsync (req: Request, res: Response, next: NextFunction) {
+    await asyncAwait();
+    res.json('Response succeeded');
     next();
   }
 }
