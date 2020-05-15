@@ -30,6 +30,13 @@ export const file = (sequelize: Sequelize): FileModel => {
       validate: {
         notEmpty: true
       }
+    },
+    time_created: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     }
   }) as FileModel;
 
