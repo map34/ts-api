@@ -19,7 +19,7 @@ export const user = (sequelize: Sequelize): UserModel => {
         notEmpty: true
       }
     },
-    fileLimit: {
+    file_limit: {
       type: DataTypes.INTEGER,
       unique: false,
       allowNull: false,
