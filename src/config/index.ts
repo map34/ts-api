@@ -10,8 +10,9 @@ export const config: Config = {
   db: {
     user: '<user_name>',
     password: isProd ? '<password>' : '<password>',
-    server: isProd ? '<host_name>' : '<host_name>',
+    host: isProd ? '<host_name>' : '<host_name>',
     database: '<database_name>',
-    requestTimeout: 60000
+    port: -1,
+    query_timeout: 10000
   }
 };

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ConnectionPool } from 'mssql';
+import { Client } from 'pg';
 import { config } from '../config';
 import { ConnectionMap } from '../types';
 
@@ -16,22 +16,19 @@ export abstract class BaseRoute {
   protected router: Router = Router();
   protected connection: ConnectionMap = {};
 
-  async connect (name: string): Promise<ConnectionPool> {
+  async connect (name: string): Promise<Client> {
     if (!this.connection[name]) {
-      this.connection[name] = new ConnectionPool(sqlConfig(name));
+      this.connection[name] = new Client(sqlConfig(name));
     }
 
-    // not yet connected, start the connection.
-    if (!this.connection[name].connected && !this.connection[name].connecting) {
-      await this.connection[name].connect();
-    }
+    await this.connection[name].connect();
 
     return this.connection[name];
   }
 
   async disconnect (name: string): Promise<boolean> {
     try {
-      await this.connection[name].close();
+      await this.connection[name].end();
       return true;
 
     } catch (e) {

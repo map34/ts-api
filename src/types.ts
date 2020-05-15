@@ -1,5 +1,5 @@
-import { ConnectionPool } from 'mssql';
+import { Client } from 'pg';
 
 export interface ConnectionMap {
-  [details: string]: ConnectionPool;
+  [details: string]: Client;
 }
