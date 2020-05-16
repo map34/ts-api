@@ -4,9 +4,7 @@ import { Server } from './app';
 import { config } from './config';
 import { logger } from './services';
 import {
-  dbConnection,
-  User,
-  File
+  dbConnection
 } from './models';
 
 const debug = require('debug')('express:server');
@@ -15,28 +13,12 @@ const port = parseInt(process.env.PORT, 10) || config.port;
 
 // create http server
 export const server = Server.bootstrap().app;
-const createUsersWithFiles = async () => {
-  const newUser = await User.create({
-    username: 'ulrich0203',
-    fileLimit: 10,
-    files: [{
-      url: 'haha',
-      sizeBytes: 123,
-      sha256: '111'
-    }]
-  }, {
-    include: [File]
-  });
-
-  logger.info(JSON.stringify(newUser.files));
-};
 
 (async () => {
-  await dbConnection.sync({ force: true });
-  await createUsersWithFiles();
+  await dbConnection.sync();
   server.listen(port);
 })().then(() => {
-  logger.info('Server started successfully :)');
+  logger.info(`Server started successfully :), serving on port: ${port}`);
 }, (err) => {
   logger.error(err);
 });
