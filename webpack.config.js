@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const env = process.env.NODE_ENV || 'development';
+const port = process.env.PORT || '5000';
 const isProd = env === 'production';
 const fs = require('fs');
 const {
@@ -42,7 +43,8 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': { // eslint-disable-line quote-props
-        NODE_ENV: JSON.stringify(env)
+        NODE_ENV: JSON.stringify(env),
+        PORT: JSON.stringify(port)
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

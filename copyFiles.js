@@ -4,4 +4,4 @@ const isProd = env === 'production';
 const shell = require('shelljs');
 
 shell.cp('package.json', 'dist/package.json');
-shell.cp(isProd ? 'pm2/processes.prod.json' : 'pm2/processes.dev.json', 'dist/processes.json');
+shell.cp(isProd ? 'pm2/ecosystem.config.prod.js' : 'pm2/ecosystem.config.dev.js', 'dist/ecosystem.config.js');

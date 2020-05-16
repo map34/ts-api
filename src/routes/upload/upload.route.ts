@@ -29,10 +29,12 @@ export class UploadRoute extends BaseRoute {
    */
   private constructor () {
     super();
+
     this.getFile = this.getFile.bind(this);
     this.getFiles = this.getFiles.bind(this);
     this.addFile = this.addFile.bind(this);
     this.addFiles = this.addFiles.bind(this);
+    this.deleteFile = this.deleteFile.bind(this);
     this.init();
   }
 
@@ -51,6 +53,7 @@ export class UploadRoute extends BaseRoute {
     this.router.get('/files', this.getFiles);
     this.router.post('/file', upload.single(''), this.addFile);
     this.router.post('/files', upload.array(''), this.addFiles);
+    this.router.delete('/files/:id', this.deleteFile);
   }
 
   /**
@@ -65,7 +68,6 @@ export class UploadRoute extends BaseRoute {
       const col = await loadLocalDB(COLLECTION_NAME, db);
       const numericId = parseInt(req.params.id, 10);
       const result = col.get(numericId);
-      logger.info(result.filename);
 
       if (!result) {
         res.sendStatus(404);
@@ -131,6 +133,27 @@ export class UploadRoute extends BaseRoute {
 
       db.saveDatabase();
       res.send(data.map(x => ({ id: x.$loki, fileName: x.filename, originalName: x.originalname })));
+    } catch (err) {
+      logger.error(err);
+      res.sendStatus(400);
+    }
+  }
+
+  private async deleteFile (req: Request, res: Response, next: NextFunction) {
+    try {
+      const col = await loadLocalDB(COLLECTION_NAME, db);
+      const numericId = parseInt(req.params.id, 10);
+      const result = col.get(numericId);
+
+      if (!result) {
+        res.sendStatus(404);
+        return;
+      }
+
+      col.remove(result);
+      db.saveDatabase();
+
+      res.sendStatus(200);
     } catch (err) {
       logger.error(err);
       res.sendStatus(400);

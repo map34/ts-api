@@ -10,7 +10,7 @@
     "prod": "cross-env NODE_ENV=production nodemon --exec ts-node src/index.ts",
     "build": "npm run build:dev",
     "build:dev": "webpack --config ./webpack.config.js --progress --profile --color --display-error-details --display-cached && npm run copy-files",
-    "build:prod": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --profile --color --display-error-details --display-cached --bail && npm run copy-files",
+    "build:prod": "cross-env NODE_ENV=production PORT=3000 webpack --config ./webpack.config.js  --progress --profile --color --display-error-details --display-cached --bail && cross-env NODE_ENV=production npm run copy-files",
     "copy-files": "node copyFiles.js",
     "clean": "npm cache clean --force && rimraf -- dist",
     "compile-to-js": "tsc -p ./tsconfig.json"

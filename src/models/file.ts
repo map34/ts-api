@@ -1,23 +1,11 @@
-import { Sequelize, DataTypes } from 'sequelize';
-import { ModelsMap, FileModel } from '../types';
+import { Sequelize, DataTypes, Model } from 'sequelize';
+import { User } from './user';
 
-export const file = (sequelize: Sequelize): FileModel => {
-  const File = sequelize.define('file', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
+export class File extends Model {}
+
+export const init = (sequelize: Sequelize) => {
+  File.init({
     url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
-    sha_256: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -31,18 +19,17 @@ export const file = (sequelize: Sequelize): FileModel => {
         notEmpty: true
       }
     },
-    time_created: {
-      type: DataTypes.DATE,
+    sha_256: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     }
-  }) as FileModel;
+  }, {
+    sequelize,
+    modelName: 'file'
+  });
 
-  File.associate = (models: ModelsMap) => {
-    File.belongsTo(models.User);
-  };
-
-  return File;
+  File.belongsTo(User);
 };

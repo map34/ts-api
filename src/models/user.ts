@@ -1,17 +1,11 @@
-import { Sequelize, DataTypes } from 'sequelize';
-import { UserModel } from '../types';
+import { Sequelize, DataTypes, Model } from 'sequelize';
+import { File } from './file';
 
-export const user = (sequelize: Sequelize): UserModel => {
-  const User = sequelize.define('user', {
+export class User extends Model {}
+
+export const init = (sequelize: Sequelize) => {
+  User.init({
     username: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
-    email: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
@@ -27,11 +21,8 @@ export const user = (sequelize: Sequelize): UserModel => {
         notEmpty: true
       }
     }
-  }) as UserModel;
-
-  User.associate = (models) => {
-    User.hasMany(models.File);
-  };
-
-  return User;
+  }, {
+    sequelize,
+    modelName: 'user'
+  });
 };
