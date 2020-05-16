@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { logger } from '../../services';
-import { asyncAwait } from '../../scripts/async';
 import { BaseRoute } from '../route';
 
 /**

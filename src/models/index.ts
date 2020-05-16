@@ -1,6 +1,6 @@
-import { Sequelize } from 'sequelize';
-import { User, init as userInit } from './user';
-import { File, init as fileInit } from './file';
+import { Sequelize } from 'sequelize-typescript';
+import { User } from './user';
+import { File } from './file';
 
 const sequelize = new Sequelize(
   process.env.DATABASE || 'objects',
@@ -12,12 +12,14 @@ const sequelize = new Sequelize(
       max: 5,
       min: 0,
       idle: 10000
-    }
+    },
+    models: [User, File]
   }
 );
 
-userInit(sequelize);
-fileInit(sequelize);
-
-export { sequelize as dbConnection, User, File };
 export * from './config.model';
+export {
+  sequelize as dbConnection,
+  User,
+  File
+};
