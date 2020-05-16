@@ -47,15 +47,6 @@ const config = {
         PORT: JSON.stringify(port)
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: false
-    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         tslint: {

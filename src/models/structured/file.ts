@@ -18,7 +18,7 @@ export class File extends Model<File> {
   url: string;
 
   @Column(DataType.TEXT)
-  description: Text;
+  description: string;
 
   @Column({
     type: DataType.BIGINT,
