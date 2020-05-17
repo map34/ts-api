@@ -4,7 +4,7 @@ module.exports = {
     name: 'api-dev',
     exec_mode: 'cluster',
     node_args: '--harmony',
-    instances: 3,
+    instances: 1,
     env: {
       'NODE_ENV': 'development',
       'PORT': 5001

@@ -1,4 +1,5 @@
 const baseConfig = require('./webpack.config');
+const TerserPlugin = require('terser-webpack-plugin');
 module.exports = Object.assign(
   {},
   baseConfig,
@@ -6,7 +7,15 @@ module.exports = Object.assign(
     mode: 'production',
     devtool: 'source-map',
     optimization: {
-      minimize: false
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            keep_fnames: true,
+            sourceMap: true
+          },
+        }),
+      ],
     }
   }
 );

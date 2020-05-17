@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const TerserPlugin = require('terser-webpack-plugin');
 
 const externals = {};
 fs.readdirSync('node_modules')
