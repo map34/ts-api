@@ -6,6 +6,8 @@ import * as expressStatusMonitor from 'express-status-monitor';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as path from 'path';
+import 'source-map-support/register';
+import 'express-async-errors';
 
 import { ApiRoutes } from './routes';
 import { logger } from './services';
