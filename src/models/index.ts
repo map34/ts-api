@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
-import { User } from './structured//user';
-import { File } from './structured/file';
+import { User } from './user';
+import { File } from './file';
 
 const sequelize = new Sequelize(
   process.env.DATABASE || 'objects',
@@ -17,7 +17,6 @@ const sequelize = new Sequelize(
   }
 );
 
-export * from './structured/config.model';
 export {
   sequelize as dbConnection,
   User,

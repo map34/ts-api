@@ -1,4 +1,4 @@
-import { Config } from '../models';
+import { Config } from '../types';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = env === 'production';
