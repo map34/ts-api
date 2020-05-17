@@ -11,7 +11,7 @@ module.exports = Object.assign(
       minimizer: [
         new TerserPlugin({
           terserOptions: {
-            keep_fnames: true,
+            keep_classnames: true,
             sourceMap: true
           },
         }),
