@@ -5,3 +5,4 @@ const shell = require('shelljs');
 
 shell.cp('package.json', 'dist/package.json');
 shell.cp(isProd ? 'pm2/ecosystem.config.prod.js' : 'pm2/ecosystem.config.dev.js', 'dist/ecosystem.config.js');
+shell.cp('ormconfig.json', 'dist/ormconfig.json');

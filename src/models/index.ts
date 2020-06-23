@@ -1,24 +1,18 @@
-import { Sequelize } from 'sequelize-typescript';
-import { User } from './user';
-import { File } from './file';
+import { createConnection, Connection } from 'typeorm';
 
-const sequelize = new Sequelize(
-  process.env.DATABASE || 'objects',
-  process.env.DATABASE_USER || 'user',
-  process.env.DATABASE_PASSWORD || 'password',
-  {
-    dialect: 'postgres',
-    pool: {
-      max: 5,
-      min: 0,
-      idle: 10000
-    },
-    models: [User, File]
+export class Model {
+  private static connection: Connection;
+
+  static async init () {
+    Model.connection = await createConnection();
   }
-);
 
-export {
-  sequelize as dbConnection,
-  User,
-  File
-};
+  static getConnection (): Connection {
+    if (!Model.connection) {
+      throw new Error('Connection is not initialized! Please do Model.init()');
+    }
+    return Model.connection;
+  }
+}
+
+export * from './entity';

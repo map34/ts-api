@@ -8,6 +8,7 @@ import * as morgan from 'morgan';
 import * as path from 'path';
 import 'source-map-support/register';
 import 'express-async-errors';
+import 'reflect-metadata';
 
 import { ApiRoutes } from './routes';
 import { logger } from './services';
