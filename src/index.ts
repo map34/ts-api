@@ -1,12 +1,12 @@
 import { Server } from './app';
-import { config } from './config';
 import { logger } from './services';
+import { serverConfig } from './config';
 import { Model } from './models';
 import { executeDBTransaction } from './scripts/dbSync';
 
 const debug = require('debug')('express:server');
 
-const port = parseInt(process.env.PORT, 10) || config.port;
+const port = parseInt(process.env.PORT, 10) || serverConfig.port;
 export const server = Server.bootstrap().app;
 // create http server
 
