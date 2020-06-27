@@ -1,7 +1,9 @@
 import {
   User,
   File
-} from '../models';
+} from '../models/entity';
+
+import migrations from '../models/migration';
 import { ConnectionOptions } from 'typeorm';
 
 const ormConfig: ConnectionOptions = {
@@ -11,12 +13,13 @@ const ormConfig: ConnectionOptions = {
   username: 'test',
   password: 'test',
   database: 'test',
-  synchronize: true,
-  logging: false,
+  synchronize: false,
+  logging: true ,
+  migrations: Object.values(migrations),
   entities: [
     User,
     File
   ]
 };
 
-export { ormConfig };
+export = ormConfig;

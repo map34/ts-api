@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
 import * as fs from 'fs';
 import * as Loki from 'lokijs';
 import * as multer from 'multer';
@@ -38,7 +38,7 @@ export class UploadRoute extends BaseRoute {
     this.init();
   }
 
-  static get router () {
+  static get router (): Router {
     if (!UploadRoute.instance) {
       UploadRoute.instance = new UploadRoute();
     }
@@ -63,7 +63,7 @@ export class UploadRoute extends BaseRoute {
    * @param res {Response} The express Response object.
    * @param next {NextFunction} Execute the next method.
    */
-  private async getFile (req: Request, res: Response, next: NextFunction) {
+  private async getFile (req: Request, res: Response) {
     try {
       const col = await loadLocalDB(COLLECTION_NAME, db);
       const numericId = parseInt(req.params.id, 10);
@@ -89,7 +89,7 @@ export class UploadRoute extends BaseRoute {
    * @param res {Response} The express Response object.
    * @param next {NextFunction} Execute the next method.
    */
-  private async getFiles (req: Request, res: Response, next: NextFunction) {
+  private async getFiles (req: Request, res: Response) {
     try {
       const col = await loadLocalDB(COLLECTION_NAME, db);
       res.send(col.data);
@@ -106,7 +106,7 @@ export class UploadRoute extends BaseRoute {
    * @param res {Response} The express Response object.
    * @param next {NextFunction} Execute the next method.
    */
-  private async addFile (req: Request, res: Response, next: NextFunction) {
+  private async addFile (req: Request, res: Response) {
     try {
       const col = await loadLocalDB(COLLECTION_NAME, db);
       const data = col.insert(req.file);
@@ -126,7 +126,7 @@ export class UploadRoute extends BaseRoute {
    * @param res {Response} The express Response object.
    * @param next {NextFunction} Execute the next method.
    */
-  private async addFiles (req: Request, res: Response, next: NextFunction) {
+  private async addFiles (req: Request, res: Response) {
     try {
       const col = await loadLocalDB(COLLECTION_NAME, db);
       const data = [].concat(col.insert(req.files));
@@ -139,7 +139,7 @@ export class UploadRoute extends BaseRoute {
     }
   }
 
-  private async deleteFile (req: Request, res: Response, next: NextFunction) {
+  private async deleteFile (req: Request, res: Response) {
     try {
       const col = await loadLocalDB(COLLECTION_NAME, db);
       const numericId = parseInt(req.params.id, 10);

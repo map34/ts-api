@@ -12,6 +12,7 @@ import 'reflect-metadata';
 
 import { ApiRoutes } from './routes';
 import { logger } from './services';
+import { ResponseError } from './types/common';
 
 import errorHandler = require('errorhandler');
 import methodOverride = require('method-override');
@@ -86,7 +87,7 @@ export class Server {
     this.app.use(expressStatusMonitor());
 
     // catch 404 and forward to error handler
-    this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    this.app.use((err: ResponseError, req: express.Request, res: express.Response, next: express.NextFunction) => {
       err.status = 404;
       next(err);
     });

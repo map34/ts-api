@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { logger } from '../services';
 import { PingRoute } from './ping';
 import { BaseRoute } from './route';
@@ -56,7 +56,7 @@ export class ApiRoutes extends BaseRoute {
    * @param res {Response} The express Response object.
    * @param next {NextFunction} Execute the next method.
    */
-  private async get (req: Request, res: Response, next: NextFunction) {
+  private async get (req: Request, res: Response) {
     res.status(200).json({ online: true });
   }
 }

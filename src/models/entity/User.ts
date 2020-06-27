@@ -17,6 +17,6 @@ export class User {
   @Column()
   fileLimit: number;
 
-  @OneToMany(type => File, file => file.user)
+  @OneToMany(() => File, file => file.user)
   files: File[];
 }

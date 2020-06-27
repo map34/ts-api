@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { logger } from '../../services';
 import { BaseRoute } from '../route';
 
@@ -25,7 +25,7 @@ export class PingRoute extends BaseRoute {
     this.init();
   }
 
-  static get router () {
+  static get router (): Router {
     if (!PingRoute.instance) {
       PingRoute.instance = new PingRoute();
     }

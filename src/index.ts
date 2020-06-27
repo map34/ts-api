@@ -1,10 +1,10 @@
 import { Server } from './app';
 import { logger } from './services';
-import { serverConfig } from './config';
+import * as serverConfig from './config/serverconfig';
 import { Model } from './models';
 import { executeDBTransaction } from './scripts/dbSync';
 
-const debug = require('debug')('express:server');
+require('debug')('express:server');
 
 const port = parseInt(process.env.PORT, 10) || serverConfig.port;
 export const server = Server.bootstrap().app;

@@ -6,7 +6,7 @@ export class File {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column('text')
+  @Column('text', { nullable: true })
   description: string;
 
   @Column('bigint')
@@ -15,6 +15,6 @@ export class File {
   @Column()
   sha256: string;
 
-  @ManyToOne(type => User, user => user.files)
+  @ManyToOne(() => User, user => user.files, { onDelete: 'CASCADE' })
   user: User;
 }

@@ -1,10 +1,10 @@
 import { createConnection, Connection } from 'typeorm';
-import { ormConfig } from '../config';
+import * as ormConfig from '../config/ormconfig';
 
 export class Model {
   private static connection: Connection;
 
-  static async init () {
+  static async init (): Promise<void> {
     Model.connection = await createConnection(ormConfig);
   }
 

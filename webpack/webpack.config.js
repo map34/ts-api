@@ -1,15 +1,8 @@
 const path = require('path');
-const fs = require('fs');
-
-const externals = {};
-fs.readdirSync('node_modules')
-  .filter(x => ['.bin'].indexOf(x) === -1)
-  .forEach((mod) => {
-    externals[mod] = `commonjs ${mod}`;
-  });
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  externals,
+  externals: [nodeExternals()],
   context: path.resolve('./src'),
   mode: 'development',
   devtool: 'inline-source-map',
