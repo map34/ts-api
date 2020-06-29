@@ -17,5 +17,5 @@ Happy linting! 💖
     "javascript.implicitProjectConfig.experimentalDecorators": true,
     "eslint.enable": true,
     "typescript.tsdk": "node_modules/typescript/lib",
-    "typescript.validate.enable": true
+    "typescript.validate.enable": false
 }
